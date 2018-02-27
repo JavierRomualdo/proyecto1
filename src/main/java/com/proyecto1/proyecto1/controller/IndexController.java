@@ -5,6 +5,8 @@
  */
 package com.proyecto1.proyecto1.controller;
 
+import com.proyecto1.proyecto1.dao.IPersonaDao;
+import com.proyecto1.proyecto1.entidades.Persona;
 import com.proyecto1.proyecto1.servicio.IIndexIServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,9 @@ public class IndexController {
     @Autowired
     IIndexIServicio indexServicio;
     
+    @Autowired
+    IPersonaDao personadao;
+    
     @GetMapping("mensaje")
     public String mensaje() {
         String mensajeServicio = indexServicio.devolverMensaje();
@@ -33,6 +38,13 @@ public class IndexController {
     public String mirar(){
         return "mario es gay";
     }
+    
+    @GetMapping("persona")
+    public Persona getPersona(){
+        return personadao.findOne(new Long(1));
+    }
+    
+    
     
     @GetMapping("arreglo")
     public String[] hola(){
